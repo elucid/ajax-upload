@@ -1,4 +1,4 @@
-This componet isn't supported at the moment, please use you to use a newer
+This component isn't supported at the moment, please use a newer
 [qq.FileUploader plugin](http://valums.com/ajax-upload/) instead, which
 adds a couple of new options and features, and fixes some bugs.
 
