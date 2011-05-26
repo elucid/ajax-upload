@@ -245,7 +245,7 @@
             },
             // Callback to fire before file is uploaded
             // You can return false to cancel upload
-            onSubmit: function(file, extension){
+            onSubmit: function(file, extension, form){
             },
             // Fired when file upload is completed
             // WARNING! DO NOT USE "FALSE" STRING AS A RESPONSE!
@@ -648,16 +648,17 @@
                                     
             var file = fileFromPath(this._input.value);
             
+            var iframe = this._createIframe();
+            var form = this._createForm(iframe);
+
             // user returned false to cancel upload
-            if (false === settings.onSubmit.call(this, file, getExt(file))){
+            if (false === settings.onSubmit.call(this, file, getExt(file), form)){
                 this._clearInput();                
                 return;
             }
             
             // sending request    
-            var iframe = this._createIframe();
-            var form = this._createForm(iframe);
-            
+
             // assuming following structure
             // div -> input type='file'
             removeNode(this._input.parentNode);            
