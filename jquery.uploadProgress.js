@@ -58,21 +58,20 @@ jQuery.uploadProgress = function(e, options) {
     url: options.progressUrl + "?X-Progress-ID=" + options.uuid,
     dataType: options.dataType,
     success: function(upload) {
-      if (upload.state == 'uploading') {
-        options.uploading(upload);
-      }
-      
-      if (upload.state == 'done' || upload.state == 'error') {
-        window.clearTimeout(options.timer);
-        options.complete(upload);
-      }
-      
-      if (upload.state == 'done') {
-        options.success(upload);
-      }
-      
-      if (upload.state == 'error') {
-        options.error(upload);
+      switch (upload.state) {
+        case 'uploading':
+          options.uploading(upload);
+          break;
+        case 'done':
+          window.clearTimeout(options.timer);
+          options.complete(upload);
+          options.success(upload);
+          break;
+        case 'error':
+          window.clearTimeout(options.timer);
+          options.complete(upload);
+          options.error(upload);
+          break;
       }
     }
   });
