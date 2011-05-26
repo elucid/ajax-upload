@@ -666,8 +666,17 @@
             removeClass(self._button, self._settings.focusClass);
                         
             form.appendChild(this._input);
-                        
-            form.submit();
+
+            // if available, use jQuery.submit()
+            // current browsers typically don't fire onSubmit when forms are
+            // submitted programatically.
+            // if you can think of a reliable, relatively simple way to achieve
+            // this without jQuery please let me know and use it instead
+            if (window.jQuery === undefined) {
+              form.submit();
+            } else {
+              jQuery(form).submit();
+            }
 
             // request set, clean up                
             removeNode(form); form = null;                          
