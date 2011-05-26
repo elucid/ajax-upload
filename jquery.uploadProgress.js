@@ -12,7 +12,6 @@
   options = $.extend({
     dataType: "json",
     interval: 2000,
-    progressBar: "#progressbar",
     progressUrl: "/progress",
     start: function() {},
     uploading: function() {},
@@ -60,9 +59,6 @@ jQuery.uploadProgress = function(e, options) {
     dataType: options.dataType,
     success: function(upload) {
       if (upload.state == 'uploading') {
-        upload.percents = Math.floor((upload.received / upload.size)*1000)/10;
-        
-        $(options.progressBar).css({width: upload.percents+'%'});
         options.uploading(upload);
       }
       
